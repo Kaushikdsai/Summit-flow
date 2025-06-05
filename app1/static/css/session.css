@@ -1,0 +1,55 @@
+body{
+    background-color: #16222A;
+    color: white;
+}
+.main{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-top: 145px;
+}
+.p1{
+    font-size:35px;
+}
+#p2{
+    font-size: 19px;
+}
+#p2 span{
+    font-size: 33px;
+}
+.mountain-img{
+    width: 40%;
+}
+.img-container{
+    position: relative;
+    z-index: 8;
+}
+.bike-img{
+    animation-play-state: running;
+    position: absolute;
+    width: 40px;
+    height: auto;
+    left: 30%;
+    top: 85.8%;
+    animation: none;
+    transform: rotate(334deg);
+}
+@keyframes move{
+    from{
+        left: 30%;
+        top: 85.8%;
+    }
+    to{
+        left: calc(100% - 696px);
+        top: 19%;
+    }
+}
+#timer{
+    font-size: 70px;
+    display: inline;
+}
+button {
+    background: none; 
+    border: none;
+    cursor: pointer;
+}

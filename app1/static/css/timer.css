@@ -1,0 +1,51 @@
+body{
+    background-color: #16222A;
+    color: white;
+}
+.main{
+    margin-top: 190px;
+    padding: 20px;
+    height: 480px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-left: 29%;
+    border-radius: 10px;
+    background-color: #0B1C26;
+    width: 900px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+h1{
+    margin-bottom: 80px;
+}
+label{
+    font-size: 24px;
+}
+input{
+    width: 260px;
+    text-align: center;
+    margin-top: 12px;
+    margin-bottom: 12px;
+
+}
+textarea{
+    width: 260px;
+    resize: none;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+button{
+    margin-top: 5px;
+    margin-bottom: 98px;
+    cursor: pointer;
+    padding: 4px;
+    width: 160px;
+    background-color: #29B6F6;
+    border: none;
+    color: rgb(255, 255, 255);
+}
+.message-li{
+    padding: 0;
+    list-style: none;
+    margin: 0;
+}

@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <title>Navbar</title>
+</head>
+<body>
+    <nav class="nav-main">
+        <div class="nav-left">
+            <img alt="logo" src="{% static 'images/SummitFlow-logo.png' %}">
+            <h1 class="app-name">SummitFlow</h1>
+        </div>
+        <div class="nav-right">
+            <ul class="right-li">
+                {% if user.is_authenticated %}
+                    <li>NAME1</li>
+                    <li>NAME2</li>
+                    <li>NAME3</li>
+                    <li>
+                        <a href="{% url 'dashboard' %}">
+                            <img src="{% static 'images/User-profile-PNG-Image.png' %}">
+                        </a>
+                    </li>
+                {% else %}
+                    <li>A</li>
+                    <li>B</li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</body>
+<script>
+
+</script>
+</html>

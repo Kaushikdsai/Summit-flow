@@ -1,0 +1,23 @@
+body{
+    background-color: #16222A;
+    color: white;   
+}
+.main{
+    margin-top: 140px;
+}
+.user-information{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 90px;
+}
+.user-details{
+    display: flex;
+    margin-bottom: 100px;
+    text-align: center;
+    align-items: center;
+}
+.session-details{
+    margin-left: 460px;
+    margin-right: 460px;
+}

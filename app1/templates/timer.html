@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/timer.css' %}">
+    <title>Timer</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <form method="POST" class="main">
+        {% csrf_token %}
+        <h1>SESSION DETAILS</h1>
+        <div class="details">
+            <label>Focus Duration</label>
+            <br>
+            <input type="time" id="focusDuration" name="focus_duration" step="1" placeholder="Enter the focus duration">
+        </div>
+        <div class="details">
+            <label>Break Duration</label>
+            <br>
+            <input type="time" id="breakDuration" name="break_duration" step="1" placeholder="Enter the break duration">
+        </div>
+        <div class="details">
+            <label>Websites to restrict</label>
+            <br>
+            <textarea rows="5" cols="30" placeholder="Enter the URLs" name="websites"></textarea>
+        </div>
+        {% if messages %}
+        <ul class="message-li">
+            {% for message in messages %}
+            <li style="color: red;">{{message}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <button>Start</button>
+    </form>
+    <script src="{% static 'session.js' %}"></script>
+</body>
+</html>
