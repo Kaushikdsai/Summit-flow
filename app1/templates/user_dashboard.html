@@ -11,14 +11,14 @@
     {% include 'navbar.html' %}
     <div class="main">
         <div class="user-information">
-            <h1 id="user-name">Name</h1>
-            <p id="user-id">ID</p>
+            <h1 id="user-name">{{ name }}</h1>
+            <p id="user-id">{{ user_id }}</p>
         </div>
         <div class="user-details">
             <div class="session-details">
-                <h2>Rank: <span id="user-rank">0</span></h2>
-                <h2>Rating: <span id="user-rating">0</span></h2>
-                <h2>Total Hours: <span id="total-hours">0</span></h2>
+                <h2>Rank: <span id="user-rank">{{ rank }}</span></h2>
+                <h2>Rating: <span id="user-rating">{{ rating }}</span></h2>
+                <h2>Total Hours: <span id="total-hours">{{ total_hours }}</span></h2>
             </div>
             <div class="user-badges">
                 <img alt="bronze-badge" src="bronze-badge">

@@ -181,6 +181,7 @@ def update_metrics(request):
         metrics.total_hours+=hours
         metrics.rating+=session_seconds
         metrics.save()
+        calculateRank()
         responseData={
             'total_hours':metrics.total_hours,
             'rating': metrics.rating,
@@ -188,6 +189,32 @@ def update_metrics(request):
         }
         return JsonResponse(responseData)
     return JsonResponse({'error': 'Invalid method'}, status=405)
+
+def calculateRank():
+    all_metrics=UserMetrics.objects.all().order_by('-rating')
+    rank=1
+    for metrics in all_metrics:
+        metrics.rank=rank
+        metrics.save()
+        rank+=1
+
+@login_required
+def user_dashboard(request):
+    try:
+        user=request.user
+        metrics = UserMetrics.objects.get(user=user) 
+        context = {
+            'name': user.name,
+            'user_id': user.id,
+            'rank': metrics.rank,
+            'rating': metrics.rating,
+            'total_hours': metrics.total_hours,
+        }
+    except UserMetrics.DoesNotExist:
+        context = {
+            'error': 'Metrics not found for this user.'
+        }
+    return render(request,'user_dashboard.html',context)
 
 def bike(request):
     return render(request,"bike1.html")

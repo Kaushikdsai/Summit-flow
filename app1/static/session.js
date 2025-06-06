@@ -2,16 +2,11 @@ const startElement=document.getElementById('start');
 const restartElement=document.getElementById('restart');
 const fastForwardElement=document.getElementById('fast-forward');
 const timerElement=document.getElementById('timer');
-const percentageElement=document.getElementById('percentage')
+const percentageElement=document.getElementById('percentage');
 const img=document.getElementById('start-stop');
 const bikeImg=document.getElementById('svg-image');
 const playImage=img.dataset.playSrc;
 const pauseImage=img.dataset.pauseSrc;
-const rankElement=document.getElementById('user-rank');
-const ratingElement=document.getElementById('user-rating');
-const hoursElement=document.getElementById('total-hours');
-const nameElement=document.getElementById('user-name');
-const idElement=document.getElementById('user-id');
 
 let totalSeconds;
 let temp;
@@ -51,20 +46,17 @@ function tick(){
             if(totalSeconds===breakTime){
                 isOnBreak=true;
             }
-        } 
-        else{
+        }else{
             clearInterval(interval);
             isFirst=true;
             alert("The session is done! Congratulations for successfully completing it!");
             sendSessionData(temp);
         }
-    }
-    else{
+    }else{
         if(totalBreakSeconds>0){
             bikeImg.style.animationPlayState='paused';
             totalBreakSeconds--;
-        }
-        else{
+        }else{
             isOnBreak=false;
             bikeImg.style.animationPlayState='running';
             totalSeconds--;
@@ -78,13 +70,12 @@ function updateTimer(seconds){
     const minutes=Math.floor((seconds%3600)/60);
     const secs=seconds%60;
     const newTime=[
-        String(hours).padStart(2, '0'),
-        String(minutes).padStart(2, '0'),
-        String(secs).padStart(2, '0')
+        String(hours).padStart(2,'0'),
+        String(minutes).padStart(2,'0'),
+        String(secs).padStart(2,'0')
     ].join(":");
     timerElement.textContent=newTime;
     percentageElement.textContent=Math.floor(((temp-seconds)/temp)*100);
-    console.log(percentageElement.textContent);
 }
 
 function restartTimer(){
@@ -104,27 +95,23 @@ function fastForwardTimer(){
     let allowedTime=((87/100)*temp);
     if((temp-totalSeconds)>allowedTime){
         clearInterval(interval);
-        console.log(allowedTime);
         interval=setInterval(tick,500);
-    }
-    else{
-        alert("You need to pass through atleast 87% of the time")
+    }else{
+        alert("You need to pass through atleast 87% of the time");
     }
 }
 
 function toggle(){
-    if(img.src.endsWith("play.png")){
+    if(img.src.includes("play.png")){
         img.src=pauseImage;
-        if(totalSeconds<=0 && !isOnBreak){
+        if(totalSeconds<=0&&!isOnBreak){
             startTimer();
-        }
-        else{
+        }else{
             bikeImg.style.animationPlayState='running';
             clearInterval(interval);
             interval=setInterval(tick,1000);
         }
-    }
-    else{
+    }else{
         img.src=playImage;
         bikeImg.style.animationPlayState='paused';
         clearInterval(interval);
@@ -137,52 +124,47 @@ function startMoving(seconds){
     bikeImg.style.animation=`move ${seconds}s linear`;
 }
 
-function sendSessionData(session_seconds) {
-  console.log('Sending session data:', session_seconds);
-
-  fetch('/update-metrics/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRFToken': getCookie('csrftoken'),
-    },
-    body: JSON.stringify({ session_seconds }),
-    credentials: 'include'
-  })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        nameElement.textContent=data.name;
-        hoursElement.textContent = data.total_hours;
-        ratingElement.textContent = data.rating;
+function sendSessionData(session_seconds){
+    console.log('Sending session data:',session_seconds);
+    fetch('/update-metrics/',{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json',
+            'X-CSRFToken':getCookie('csrftoken'),
+        },
+        body:JSON.stringify({session_seconds}),
+        credentials:'include'
     })
-    .catch(error => {
-      console.error('Error sending session data:', error);
+    .then(response=>response.json())
+    .then(data=>{
+        console.log(data);
+    })
+    .catch(error=>{
+        console.error('Error sending session data:',error);
     });
 }
 
-function getCookie(name) {
-  let cookieValue = null;
-  if (document.cookie && document.cookie !== "") {
-    const cookies = document.cookie.split(";");
-    for (let cookie of cookies) {
-      cookie = cookie.trim();
-      if (cookie.startsWith(name + "=")) {
-        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-        break;
-      }
+function getCookie(name){
+    let cookieValue=null;
+    if(document.cookie&&document.cookie!==""){
+        const cookies=document.cookie.split(";");
+        for(let cookie of cookies){
+            cookie=cookie.trim();
+            if(cookie.startsWith(name+"=")){
+                cookieValue=decodeURIComponent(cookie.substring(name.length+1));
+                break;
+            }
+        }
     }
-  }
-  return cookieValue;
+    return cookieValue;
 }
 
 startElement.addEventListener("click",()=>{
     if(isFirst){
         startTimer();
-    }
-    else{
+    }else{
         toggle();
     }
 });
-restartElement.addEventListener("click", restartTimer);
-fastForwardElement.addEventListener("click", fastForwardTimer);
+restartElement.addEventListener("click",restartTimer);
+fastForwardElement.addEventListener("click",fastForwardTimer);
