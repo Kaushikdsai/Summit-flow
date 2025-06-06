@@ -12,21 +12,28 @@
     <div class="main">
         <div class="user-information">
             <h1 id="user-name">{{ name }}</h1>
-            <p id="user-id">{{ user_id }}</p>
+            <p id="user-id">ID: {{ user_id }}</p>
         </div>
         <div class="user-details">
             <div class="session-details">
-                <h2>Rank: <span id="user-rank">{{ rank }}</span></h2>
-                <h2>Rating: <span id="user-rating">{{ rating }}</span></h2>
-                <h2>Total Hours: <span id="total-hours">{{ total_hours }}</span></h2>
+                <h2 class="rank">Rank: <span id="user-rank">{{ rank }}</span></h2>
+                <h2 class="rating">Rating: <span id="user-rating">{{ rating }}</span></h2>
+                <h2 class="hours">Total Hours: <span id="total-hours">{{ total_hours }}</span></h2>
             </div>
             <div class="user-badges">
-                <img alt="bronze-badge" src="bronze-badge">
+                <img class="badge" src="{% static 'images/bronze-badge.png' %}"
                 {{ bronze }}>
-                <img alt="silver-badge" src="silver-badge">
+                <h3 class="bronze-badges">X <span>10</span></h3>
+                <img class="badge" src="{% static 'images/silver-badge.png' %}">
                 {{ silver }}
-                <img alt="gold-badge" src="gold-badge">
+                <h3 class="silver-badges">X <span>10</span></h3>
+                <img class="badge" src="{% static 'images/gold-badge.png' %}">
                 {{ gold }}
+                <h3 class="gold-badges">X <span>10</span></h3>
+            </div>
+            <div class="user-goals">
+                <h3>Set a goal for today!</h3>
+                <textarea placeholder="Enter your goal here..." type="text" id="goal-input" rows="5" cols="60"></textarea>
             </div>
         </div>
         <div>
@@ -35,4 +42,16 @@
     </div>
 </body>
 <script src="session.js"></script>
+<script>
+    const textarea=document.getElementById('goal-input');
+    window.addEventListener('DOMContentLoaded',() => {
+        const savedVal=localStorage.getItem('my-goal');
+        if(savedVal){
+            textarea.value=savedVal;
+        }
+    });
+    textarea.addEventListener('input', () => {
+        localStorage.setItem('my-goal',textarea.value);
+    });
+</script>
 </html>

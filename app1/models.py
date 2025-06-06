@@ -49,3 +49,8 @@ class UserAchievements(models.Model):
     silver_badges=models.IntegerField(default=0)
     gold_badges=models.IntegerField(default=0)
 
+class UserData(models.Model):
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
+    date=models.DateField()
+    hours=models.IntegerField()
+    
