@@ -18,7 +18,11 @@
                 {% if user.is_authenticated %}
                     <li>NAME1</li>
                     <li>NAME2</li>
-                    <li>NAME3</li>
+                    <li>
+                        <a href="{% url 'logout' %}" class="logout">
+                            Logout
+                        </a>
+                    </li>
                     <li>
                         <a href="{% url 'dashboard' %}">
                             <img src="{% static 'images/User-profile-PNG-Image.png' %}">

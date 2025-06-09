@@ -32,5 +32,7 @@ urlpatterns = [
     path('reset/<str:reset_id>/',views.newPassword,name='new-password'),
     path('bike1/',views.bike,name='bike'),
     path('update-metrics/',views.update_metrics,name='update-metrics'),
-    path('user-dashboard/',views.user_dashboard,name='dashboard')
+    path('user-dashboard/',views.user_dashboard,name='dashboard'),
+    path('leaderboard/',views.leaderboard,name='leaderboard'),
+    path('login/',views.logout,name='logout')
 ]

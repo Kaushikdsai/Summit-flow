@@ -5,7 +5,7 @@ from urllib.parse import urlencode
 from django.conf import settings
 from django.shortcuts import render,redirect
 from django.urls import reverse
-from .models import User, PasswordReset, UserMetrics
+from .models import User, PasswordReset, UserAchievements, UserData, UserMetrics
 from django.contrib import messages
 from django.core.mail import EmailMessage
 from django.utils import timezone
@@ -13,6 +13,8 @@ from django.http import HttpResponse, JsonResponse
 from .forms import RegistrationForm, LoginForm, TimerForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
+from datetime import date
 # Create your views here.
 
 def login(request):
@@ -40,6 +42,11 @@ def login(request):
     else:
         form = LoginForm()
     return render(request, 'login.html', {'form': form})
+
+def logout(request):
+    auth_logout(request)
+    request.session.flush()
+    return render(request,'login.html')
 
 def register(request):
     if request.method=='POST':
@@ -182,6 +189,11 @@ def update_metrics(request):
         metrics.rating+=session_seconds
         metrics.save()
         calculateRank()
+        
+        today=date.today()
+        user_data,created=UserData.objects.get_or_create(user=request.user,date=today,defaults={'hours':0})
+        user_data.hours+=hours
+        user_data.save()
         responseData={
             'total_hours':metrics.total_hours,
             'rating': metrics.rating,
@@ -203,12 +215,23 @@ def user_dashboard(request):
     try:
         user=request.user
         metrics = UserMetrics.objects.get(user=user) 
-        context = {
+        achievements, created=UserAchievements.objects.get_or_create(user=metrics.user)
+        bronze=math.floor(metrics.rating/30)
+        silver=math.floor(metrics.rating/50)
+        gold=math.floor(metrics.rating/100)
+        achievements.bronze_badges=bronze
+        achievements.silver_badges=silver
+        achievements.gold_badges=gold
+        achievements.save()
+        context = { 
             'name': user.name,
-            'user_id': user.id,
+            'user_id': metrics.user.id,
             'rank': metrics.rank,
             'rating': metrics.rating,
-            'total_hours': metrics.total_hours,
+            'total_hours': metrics.total_hours,  
+            'bronze':bronze,
+            'silver':silver,
+            'gold':gold
         }
     except UserMetrics.DoesNotExist:
         context = {
@@ -217,7 +240,38 @@ def user_dashboard(request):
     return render(request,'user_dashboard.html',context)
 
 def bike(request):
-    return render(request,"bike1.html")
+    return render(request,'bike1.html')
 
 def dashboard(request):
-    return render(request,"user_dashboard.html")
+    return render(request,'user_dashboard.html')
+
+def leaderboard(request):
+    user=request.user
+    all_user_metrics=UserMetrics.objects.select_related('user').all().order_by('-rating')
+    leaderboard_data=[]
+    for metrics in all_user_metrics:
+        try:
+            achievements=UserAchievements.objects.get(user=metrics.user)
+        except UserAchievements.DoesNotExist:
+            achievements=UserAchievements(user=metrics.user)
+            bronze=math.floor(metrics.rating/30)
+            silver=math.floor(metrics.rating/50)
+            gold=math.floor(metrics.rating/100)
+            achievements.bronze_badges=bronze
+            achievements.silver_badges=silver
+            achievements.gold_badges=gold
+            achievements.save()
+        leaderboard_data.append({
+                'name': metrics.user.name,
+                'user_id': metrics.user.id,
+                'rank': metrics.rank,
+                'rating': metrics.rating,
+                'total_hours': metrics.total_hours,  
+                'bronze':achievements.bronze_badges,
+                'silver':achievements.silver_badges,
+                'gold':achievements.gold_badges
+        })
+    context = {
+        'leaderboard_data':leaderboard_data
+    }
+    return render(request,'leaderboard.html',context)

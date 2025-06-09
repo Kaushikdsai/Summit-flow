@@ -28,6 +28,9 @@ img{
     display: flex;
     align-items: center;
 }
+.logout{
+    text-decoration: none;
+}
 img{
     cursor: pointer;
     margin-top: 0;

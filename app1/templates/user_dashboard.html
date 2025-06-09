@@ -21,15 +21,12 @@
                 <h2 class="hours">Total Hours: <span id="total-hours">{{ total_hours }}</span></h2>
             </div>
             <div class="user-badges">
-                <img class="badge" src="{% static 'images/bronze-badge.png' %}"
-                {{ bronze }}>
-                <h3 class="bronze-badges">X <span>10</span></h3>
+                <img class="badge" src="{% static 'images/bronze-badge.png' %}">
+                <h3 class="bronze-badges">X <span>{{ bronze }}</span></h3>
                 <img class="badge" src="{% static 'images/silver-badge.png' %}">
-                {{ silver }}
-                <h3 class="silver-badges">X <span>10</span></h3>
+                <h3 class="silver-badges">X <span>{{ silver }}</span></h3>
                 <img class="badge" src="{% static 'images/gold-badge.png' %}">
-                {{ gold }}
-                <h3 class="gold-badges">X <span>10</span></h3>
+                <h3 class="gold-badges">X <span>{{ gold }}</span></h3>
             </div>
             <div class="user-goals">
                 <h3>Set a goal for today!</h3>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+</head>
+<body>
+    <table class="main-table">
+        <th>
+            <tr>Rank</tr>
+            <tr>Name</tr>
+            <tr>ID</tr>
+            <tr>Rating</tr>
+            <tr>Total Hours</tr>
+            <tr>Bronze</tr>
+            <tr>Silver</tr>
+            <tr>Gold</tr>
+        </th>
+        <th>
+            {% for data1 in leaderboard_data %}
+              <tr>
+                <td>{{ data1.rank }}</td>
+                <td>{{ data1.name }}</td>
+                <td>{{ data1.user_id }}</td>
+                <td>{{ data1.rating }}</td>
+                <td>{{ data1.total_hours }}</td>
+                <td>{{ data1.bronze }}</td>
+                <td>{{ data1.silver }}</td>
+                <td>{{ data1.gold }}</td>
+              </tr>
+            {% endfor %}
+        </th>
+    </table>
+</body>
+</html>

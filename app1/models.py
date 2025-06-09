@@ -53,4 +53,6 @@ class UserData(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     date=models.DateField()
     hours=models.IntegerField()
+
+
     
