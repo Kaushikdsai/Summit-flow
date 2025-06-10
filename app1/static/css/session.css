@@ -29,15 +29,15 @@ body{
     position: absolute;
     width: 40px;
     height: auto;
-    left: 30%;
-    top: 85.8%;
+    left: 29.9%;
+    top: 86.2%;
     animation: none;
     transform: rotate(334deg);
 }
 @keyframes move{
     from{
-        left: 30%;
-        top: 85.8%;
+        left: 29.9%;
+        top: 86.2%;
     }
     to{
         left: calc(100% - 696px);

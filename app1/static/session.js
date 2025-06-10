@@ -34,7 +34,7 @@ function startTimer(){
         isOnBreak=false;
         clearInterval(interval);
         interval=setInterval(tick,1000);
-        startMoving(totalSeconds);
+        startMoving(totalSeconds+1);
     }
 }
 

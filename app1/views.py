@@ -20,11 +20,11 @@ from datetime import date
 # Create your views here.
 
 def login(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
+    if request.method=='POST':
+        form=LoginForm(request.POST)
         if form.is_valid():
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
+            email=form.cleaned_data['email']
+            password=form.cleaned_data['password']
             try:
                 user = User.objects.get(email=email)
                 print(f"User found: {user.email}")
@@ -48,7 +48,7 @@ def login(request):
 def logout(request):
     auth_logout(request)
     request.session.flush()
-    return render(request,'login.html')
+    return render('login')
 
 def register(request):
     if request.method=='POST':
@@ -333,18 +333,22 @@ def fetch_chart_data(request):
                          'value':total_hours})
             
     elif range_type=="years":
+        curr_year=today.year
+        start_year=int(curr_year)-10
         user_data=UserData.objects.filter(user=request.user)
         user_data=user_data.annotate(year=ExtractYear('date'))
         grouped_data=user_data.values('year').annotate(hours=Sum('hours'))
+
+        data_dict={}
         for val in grouped_data:
-            key=str(val['year'])
+            key=val['year']
             value=val['hours']
+            data_dict[key]=value
+
+        for year in range(start_year,curr_year+1):
             data.append({
-                'label':key,
-                'value':value
+                'label':year,
+                'value':data_dict.get(year,0)
             })
 
     return JsonResponse({'data':data})
-
-def test(request):
-    return render(request,'test.html')

@@ -24,7 +24,14 @@ p{
     text-align: center;
     align-items: center;
     justify-content: center;
-    margin-bottom: 90px;
+    background-color: #0B1C26;
+    width: 18%;
+    padding: 40px;
+    margin-left: 768px;
+    margin-bottom: 40px;
+}
+.user-information p{
+    color: #FFB700;
 }
 .user-details{
     display: flex;
@@ -71,7 +78,7 @@ p{
     align-items: center;
     justify-content: center;
 }
-.session-details, .user-badges, .user-goals{
+.session-details, .user-badges, .user-goals, .user-information{
     border-radius: 20px;
 }
 textarea{
@@ -85,4 +92,33 @@ textarea{
 }
 textarea::placeholder{
     color: #0B1C26;
+}
+#range-select{
+    display: inline-block;
+    margin-left: 90%;
+    padding: 8px;
+    background-color: rgb(28, 186, 186);
+    border: #0B1C26;
+    cursor: pointer;
+}
+h4{
+    margin-left: 12px;
+}
+.chart-container{
+    margin-left: 145px;
+    width: 1600px;
+}
+.chart-main, .chart-container{
+    position: relative;
+}
+h5{
+    position: absolute;
+    margin-top: 340px;
+    margin-left: 20px;
+    color: #FFB700;
+    transform: rotate(-90deg);
+}
+h6{
+    margin-left: 48%;
+    color: #FFB700;
 }

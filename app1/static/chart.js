@@ -1,17 +1,16 @@
 const ctx=document.getElementById('hoursChart').getContext('2d');
+const rangeType=document.getElementById('range-type');
 let chart;
 function fetchAndRender(range='days'){
     fetch(`/user-chart?range=${range}`)
     .then(response => response.json())
     .then(data=>{
-        console.log('Chart data:', data);
+        rangeType.textContent=range.charAt(0).toUpperCase()+range.slice(1).toLowerCase()
         const labels=data.data.map(item => item.label); //like months
         const values=data.data.map(item => item.value); //hours
-
         if(chart){
             chart.destroy();
         }
-
         chart=new Chart(ctx, {
             type: 'bar',
             data: {
@@ -45,10 +44,10 @@ function fetchAndRender(range='days'){
                     y:{
                         beginAtZero: true,
                         min:0,
-                        max:0.05,
+                        max:0.04,
                         ticks:{
                             color: 'rgb(28,186,186)',
-                            stepSize: 1
+                            stepSize: 0.01
                         }
                     }
                 },
