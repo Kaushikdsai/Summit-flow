@@ -1,0 +1,30 @@
+body{
+    background-color: #16222A;
+    color: white;   
+}
+.main-table {
+    width: 80%;
+    margin: 160px auto 0 auto;
+    border-collapse: collapse;
+}
+.main-table th, .main-table td {
+    border: 1px solid;
+    padding: 8px;
+    text-align: center;
+}
+img{
+    size: 1px;
+}
+.main-table th {
+    background-color: #0D2644; 
+    color: #FFFFFF;       
+}
+.main-table td {
+    border-color: #FFFFFF;
+    background-color: #D1E3F8; 
+    color: #0D2644;       
+}
+.main-table tr:hover td{
+    color: #FFFFFF;
+    background-color: #0D2644; 
+}

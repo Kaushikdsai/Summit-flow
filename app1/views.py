@@ -1,4 +1,4 @@
-from datetime import timezone
+from datetime import datetime, timedelta, timezone
 import json
 import math
 from urllib.parse import urlencode
@@ -6,6 +6,8 @@ from django.conf import settings
 from django.shortcuts import render,redirect
 from django.urls import reverse
 from .models import User, PasswordReset, UserAchievements, UserData, UserMetrics
+from django.db.models.functions import ExtractMonth, ExtractYear
+from django.db.models import Sum
 from django.contrib import messages
 from django.core.mail import EmailMessage
 from django.utils import timezone
@@ -60,6 +62,9 @@ def register(request):
             print("Before saving the user")
             user.save()
             print("User saved successfully!")
+            UserMetrics.objects.create(user=user,rank=0,rating=0,total_hours=0)
+            UserAchievements.objects.create(user=user,bronze_badges=0,silver_badges=0,gold_badges=0)
+            calculateRank()
             return redirect('login')
         else:
             for field,errors in form.errors.items():
@@ -184,7 +189,7 @@ def update_metrics(request):
         data=json.loads(request.body)
         session_seconds=data.get('session_seconds',0)
         metrics, created=UserMetrics.objects.get_or_create(user=request.user)
-        hours=math.floor(session_seconds/3600)
+        hours=session_seconds/3600
         metrics.total_hours+=hours
         metrics.rating+=session_seconds
         metrics.save()
@@ -246,7 +251,6 @@ def dashboard(request):
     return render(request,'user_dashboard.html')
 
 def leaderboard(request):
-    user=request.user
     all_user_metrics=UserMetrics.objects.select_related('user').all().order_by('-rating')
     leaderboard_data=[]
     for metrics in all_user_metrics:
@@ -275,3 +279,72 @@ def leaderboard(request):
         'leaderboard_data':leaderboard_data
     }
     return render(request,'leaderboard.html',context)
+
+def fetch_chart_data(request):
+    range_type=request.GET.get('range','days')
+    today=date.today()
+    data=[]
+    if range_type=="days":
+        start_date=today.replace(day=1)
+        if(today.month!=12):
+            end_date=today.replace(month=today.month+1,day=1)-timedelta(days=1)
+        else:
+            end_date=today.replace(month=today.month,day=31)
+
+        days=[]
+        num_of_days=(end_date-start_date).days+1
+        for i in range(num_of_days):
+            curr_date=start_date+timedelta(days=i)
+            date_str=curr_date.strftime("%Y-%m-%d")
+            days.append(date_str)
+        user_data=UserData.objects.filter(user=request.user,date__month=today.month,date__year=today.year).values('date').annotate(hours=Sum('hours'))
+
+        data_dict={}
+        for val in user_data:
+            key=val['date'].strftime("%Y-%m-%d")
+            value=val['hours']
+            data_dict[key]=value
+
+        for day in days:
+            data.append({
+                'label':day,
+                'value':data_dict.get(day,0)
+            })
+
+    elif range_type=="months":
+        curr_year=today.year
+        months=[]
+        for month in range(1,13):
+            month_name=datetime(curr_year,month,1).strftime("%B")
+            months.append(month_name)
+        user_data=UserData.objects.filter(user=request.user, date__year=curr_year)
+        user_data=user_data.annotate(month=ExtractMonth('date'))
+        grouped_data=user_data.values('month').annotate(hours=Sum('hours'))
+        data_dict={}
+        for val in grouped_data:
+            key=val['month']
+            value=val['hours']
+            data_dict[key]=value
+        for i in range(12):
+            month_name=months[i]
+            month_num=i+1
+            total_hours=data_dict.get(month_num,0)
+            data.append({'label':month_name,
+                         'value':total_hours})
+            
+    elif range_type=="years":
+        user_data=UserData.objects.filter(user=request.user)
+        user_data=user_data.annotate(year=ExtractYear('date'))
+        grouped_data=user_data.values('year').annotate(hours=Sum('hours'))
+        for val in grouped_data:
+            key=str(val['year'])
+            value=val['hours']
+            data.append({
+                'label':key,
+                'value':value
+            })
+
+    return JsonResponse({'data':data})
+
+def test(request):
+    return render(request,'test.html')

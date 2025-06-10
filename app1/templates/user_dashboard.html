@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/user_dashboard.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Dashboard</title>
 </head>
 <body>
@@ -33,22 +34,20 @@
                 <textarea placeholder="Enter your goal here..." type="text" id="goal-input" rows="5" cols="60"></textarea>
             </div>
         </div>
+        <h4>BAR CHART:</h4>
         <div>
-            <img alt="dashboard">
+            <select id="range-select">
+                <option value="days">Days</option>
+                <option value="months">Months</option>
+                <option value="years">Years</option>
+            </select>
+        </div>
+        <div class="chart-container">
+            <canvas id="hoursChart" width="900" height="400"></canvas>
         </div>
     </div>
 </body>
-<script src="session.js"></script>
-<script>
-    const textarea=document.getElementById('goal-input');
-    window.addEventListener('DOMContentLoaded',() => {
-        const savedVal=localStorage.getItem('my-goal');
-        if(savedVal){
-            textarea.value=savedVal;
-        }
-    });
-    textarea.addEventListener('input', () => {
-        localStorage.setItem('my-goal',textarea.value);
-    });
-</script>
+<script src="{% static 'session.js' %}"></script>
+<script src="{% static 'goal.js' %}"></script>
+<script src="{% static 'chart.js' %}"></script>
 </html>
