@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <title>Home</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class='main'>
+        <h2>Climb your way to productivity!</h2>
+        <div class="features-section">
+          <h3>What it offers?</h3>
+          <p class="p1">Discover how our platform helps you achieve your goals effortlessly.</p>
+          <div class="features-main">
+            <div class="mountain-climb">
+              <img class="mountain-img" alt="mountain" src="{% static 'images/mountain-climb.png' %}">
+              <div class="feature-desc">
+                <h4>PROGRESS TRACKER</h4>
+                <p>Track your progress with an engaging mountain-climbing visual. Stay focused, achieve milestones, and enjoy a structured way to manage goals. Reach the summit and celebrate productivity like never before!</p>
+              </div>
+            </div>
+            <div class="user-dashboard">
+              <div class="feature-desc">
+                <h4>DASHBOARD</h4>
+                <p>Track your progress over time with interactive bar charts. Stay informed with real-time updates on your rank and rating, helping you stay motivated and focused on your goals!</p>
+              </div>
+              <img alt="dashboard" src="{% static 'images/dashboard.png' %}">
+            </div>
+            <div class="alert">
+              <img alt="alert" src="{% static 'images/alert.png' %}">
+              <div class="feature-desc">
+                <h4>FOCUS ALERTS</h4>
+                <p>Stay distraction-free with real-time website blocking alerts. Get gentle warnings for off-task browsing, helping you maintain focus and achieve your goals seamlessly.</p>
+              </div>
+            </div>
+            <div class="badges">
+              <div class="feature-desc">
+                <h4>ACHIEVEMENT BADGES</h4>
+                <p>Celebrate your milestones with Bronze, Silver, and Gold badges! Earn higher badges as your rating improves, motivating you to keep progressing toward your goals.</p>
+              </div>
+              <img alt="badge" src="{% static 'images/gold-badge.png' %}">
+            </div>
+            <div class="leaderboard">
+              <img alt="leaderboard" src="{% static 'images/leaderboard.png' %}">
+              <div class="feature-desc">
+                <h4>LEADERBOARD</h4>
+                <p>Compete with peers and climb the ranks! The leaderboard keeps you motivated by showcasing your position based on your rating and progress. Aim higher and stay ahead!</p>
+              </div>
+            </div>
+            <p class="last-para">and there's so much more—uncover features crafted to make your journey to success seamless and rewarding!</p>
+          </div>
+        </div>
+        {% if user.is_authenticted %}
+          <a href="login" style="text-decoration: none;"><button>Get Started</button></a>
+        {% else %}
+          <a href="timer" style="text-decoration: none;"><button>Get Started</button></a>
+        {% endif %}
+      </div>
+      <div class="about-section">
+        <h5>ABOUT SUMMITFLOW</h5>
+        <p>SummitFlow is a cutting-edge productivity and progress tracker designed to make your work sessions engaging and efficient. By combining simplicity with gamification, SummitFlow helps you stay focused, achieve your goals, and track your progress. Our platform provides a structured way to manage and monitor your daily and long-term objectives. Engage in productive sessions visualized through an interactive biker-climbing-the-mountain experience. Reach the summit as your session concludes, and enjoy scheduled breaks to recharge.<br><br>With features like personalized dashboards, leaderboards, and achievement badges (bronze, silver, and gold), SummitFlow fosters motivation and a sense of accomplishment. Dive into detailed metrics, including rank, rating, and productive hours displayed through bar charts spanning days, months, or years. Soft blocking of distracting sites with real-time warnings keeps your focus intact, ensuring you stay on track.<br><br>Built with a sleek, minimalistic design, SummitFlow keeps your focus on what truly matters: accomplishing your goals. Whether you're setting milestones, analyzing progress, or competing with peers, SummitFlow is your trusted companion for reaching new heights every day.
+        </p>
+      </div>
+    </div>
+</body>
+</html>

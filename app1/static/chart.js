@@ -11,6 +11,16 @@ function fetchAndRender(range='days'){
         if(chart){
             chart.destroy();
         }
+        let backgroundColor;
+        if(range=='days'){
+            backgroundColor='rgb(0, 0, 225)';
+        }
+        else if(range=='months'){
+            backgroundColor='rgb(225, 183, 0)';
+        }
+        else{
+            backgroundColor='rgb(225,0,0)'
+        }
         chart=new Chart(ctx, {
             type: 'bar',
             data: {
@@ -18,7 +28,7 @@ function fetchAndRender(range='days'){
                 datasets: [{
                     label: 'hours',
                     data: values,
-                    backgroundColor: 'rgb(0,0,225)',
+                    backgroundColor: backgroundColor,
                     borderWidth: 1
                 }]
             },

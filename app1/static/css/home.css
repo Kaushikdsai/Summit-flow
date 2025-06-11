@@ -1,0 +1,177 @@
+body{
+    background-color: #16222A;
+    color: white;   
+}
+h2,h5 {
+  margin-top: 138px;
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+h5{
+  margin-top: 40px;
+}
+
+.main button {
+  display: block;
+  margin: 20px auto;
+  background-color: #4FC3F7; 
+  color: #0B1C26;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.main button:hover {
+  background-color: #29B6F6;
+}
+
+.about-section h2 {
+  color: rgb(255, 255, 255);
+}
+
+.about-section p {
+  color: rgb(194, 194, 194);
+  margin-left: 27%;
+  width: 840px;
+  font-size: 20px;
+  text-align: justify;
+}
+
+h3{
+  font-size: 25px;
+  color: #FFB700;
+  margin-top: 5%;
+  margin-left: 8%;
+}
+
+.p1{
+  margin-left: 8%;
+  font-size: 18px;
+}
+
+.features-section{
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.features-main{
+  margin-left: 8%;
+  padding: 40px;
+  width: 67%;
+  background-color: #0B1C26;
+  img{
+    width: 290px;
+  }
+}
+
+.features-main .mountain-climb, .user-dashboard, .alert, .badges, .leaderboard{
+  border: 2px solid rgb(58, 96, 106);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.features-main .mountain-climb{
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  h4{
+    text-align: left;
+    margin-left: 40px;
+    color: green;
+  }
+  p{
+    margin-left: 40px;
+    font-size: 20px;
+    width: 829px;
+  }
+}
+
+.features-main .user-dashboard{
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  h4{
+    text-align: left;
+    margin-left: 40px;
+    color: rgb(68, 68, 255);
+  }
+  p{
+    margin-left: 40px;
+    font-size: 20px;
+    width: 890px;
+  }
+  img{
+    width: 190px;
+    margin-left: 40px;
+  }
+}
+
+.features-main .alert{
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  h4{
+    text-align: left;
+    margin-left: 40px;
+    color: red;
+  }
+  p{
+    margin-left: 40px;
+    font-size: 20px;
+    width: 829px;
+  }
+}
+
+.features-main .badges{
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  h4{
+    text-align: left;
+    margin-left: 40px;
+    color: gold;
+  }
+  p{
+    margin-left: 40px;
+    font-size: 20px;
+    width: 890px;
+  }
+  img{
+    width: 190px;
+    margin-left: 40px;
+  }
+}
+
+.features-main .leaderboard{
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  h4{
+    text-align: left;
+    margin-left: 40px;
+    color: rgb(48, 189, 225);
+  }
+  p{
+    margin-left: 40px;
+    font-size: 20px;
+    width: 829px;
+  }
+}
+
+.features-desc{
+  display: block;
+  h4{
+    margin: 0;
+  }
+}
+
+.last-para{
+  display: block;
+  text-align: center;
+  align-items: center;
+}

@@ -16,10 +16,10 @@
         <div class="nav-right">
             <ul class="right-li">
                 {% if user.is_authenticated %}
-                    <li>NAME1</li>
+                    <li><a href="{% url 'home' %}" class="home">Home</a></li>
                     <li>NAME2</li>
                     <li>
-                        <a href="{% url 'logout' %}" class="logout">
+                        <a href="{% url 'logout' %}" id="logout">
                             Logout
                         </a>
                     </li>
@@ -29,14 +29,10 @@
                         </a>
                     </li>
                 {% else %}
-                    <li>A</li>
-                    <li>B</li>
+                    <li class="login-register"><a href="{% url 'register' %}" id="login-register">Register </a> or <a href="{% url 'logout' %}" id="login-register"> Sign in</a></li>
                 {% endif %}
             </ul>
         </div>
     </nav>
 </body>
-<script>
-
-</script>
 </html>

@@ -36,7 +36,7 @@ p{
 .user-details{
     display: flex;
     gap: 15px;
-    margin-bottom: 100px;
+    margin-bottom: 40px;
     text-align: center;
     align-items: center;
 }
@@ -93,6 +93,10 @@ textarea{
 textarea::placeholder{
     color: #0B1C26;
 }
+.chart{
+    background-color: #0B1C26;
+    padding: 20px;
+}
 #range-select{
     display: inline-block;
     margin-left: 90%;
@@ -102,7 +106,7 @@ textarea::placeholder{
     cursor: pointer;
 }
 h4{
-    margin-left: 12px;
+    margin-left: 48%;
 }
 .chart-container{
     margin-left: 145px;

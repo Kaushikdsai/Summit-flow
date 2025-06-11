@@ -10,6 +10,14 @@
     display: flex;
     width: 100%;
 }
+#login-register, .home, #logout{
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+#login-register:hover, #logout:hover, .home:hover{
+    color: #4FC3F7;
+}
 img{
     width: 40px;
 }
@@ -43,4 +51,7 @@ nav ul {
     display: flex;
     margin: 0;
     list-style: none;
+}
+.login-register{
+    list-style-type: none;
 }

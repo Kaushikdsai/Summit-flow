@@ -34,23 +34,28 @@
                 <textarea placeholder="Enter your goal here..." type="text" id="goal-input" rows="5" cols="60"></textarea>
             </div>
         </div>
-        <h4>BAR CHART:</h4>
-        <div>
-            <select id="range-select">
-                <option value="days">Days</option>
-                <option value="months">Months</option>
-                <option value="years">Years</option>
-            </select>
-        </div>
-        <div class="chart-main">
-            <h5>Total Hours</h5>
-            <div class="chart-container">
-                <canvas id="hoursChart" width="900" height="400"></canvas>
+        <div class="chart">
+            <h4>BAR CHART:</h4>
+            <div>
+                <select id="range-select">
+                    <option value="days">Days</option>
+                    <option value="months">Months</option>
+                    <option value="years">Years</option>
+                </select>
             </div>
+            <div class="chart-main">
+                <h5>Total Hours</h5>
+                <div class="chart-container">
+                    <canvas id="hoursChart" width="900" height="400"></canvas>
+                </div>
+            </div>
+            <h6 id="range-type">{{ range_type }}</h6>
         </div>
-        <h6 id="range-type">{{ range_type }}</h6>
     </div>
 </body>
+<script>
+    const user_id="{{ user_id }}";
+</script>
 <script src="{% static 'session.js' %}"></script>
 <script src="{% static 'goal.js' %}"></script>
 <script src="{% static 'chart.js' %}"></script>

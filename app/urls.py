@@ -22,6 +22,7 @@ from app1 import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',views.home,name='home'),
     path('login/',views.login,name='login'),
     path('login/register/',views.register,name='register'),
     path('timer/',views.timer,name='timer'),
@@ -35,5 +36,5 @@ urlpatterns = [
     path('user-dashboard/',views.user_dashboard,name='dashboard'),
     path('user-chart/',views.fetch_chart_data,name='chart-data'),
     path('leaderboard/',views.leaderboard,name='leaderboard'),
-    path('login/',views.logout,name='logout')
+    path('logout/',views.user_logout,name='logout')
 ]

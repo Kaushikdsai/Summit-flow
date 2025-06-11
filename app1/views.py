@@ -15,9 +15,12 @@ from django.http import HttpResponse, JsonResponse
 from .forms import RegistrationForm, LoginForm, TimerForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as auth_login
-from django.contrib.auth import logout as auth_logout
+from django.contrib.auth import logout
 from datetime import date
 # Create your views here.
+
+def home(request):
+    return render(request,'home.html')
 
 def login(request):
     if request.method=='POST':
@@ -45,10 +48,13 @@ def login(request):
         form = LoginForm()
     return render(request, 'login.html', {'form': form})
 
-def logout(request):
-    auth_logout(request)
+def user_logout(request):
+    print("going to get logged out")
+    logout(request)
+    print("logged out")
     request.session.flush()
-    return render('login')
+    print("flushed")
+    return redirect('login')
 
 def register(request):
     if request.method=='POST':
