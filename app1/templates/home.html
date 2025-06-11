@@ -53,10 +53,10 @@
             <p class="last-para">and there's so much more—uncover features crafted to make your journey to success seamless and rewarding!</p>
           </div>
         </div>
-        {% if user.is_authenticted %}
-          <a href="login" style="text-decoration: none;"><button>Get Started</button></a>
-        {% else %}
+        {% if user.is_authenticated %}
           <a href="timer" style="text-decoration: none;"><button>Get Started</button></a>
+        {% else %}
+          <a href="login" style="text-decoration: none;"><button>Get Started</button></a>
         {% endif %}
       </div>
       <div class="about-section">

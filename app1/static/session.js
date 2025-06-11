@@ -8,11 +8,11 @@ const bikeImg=document.getElementById('svg-image');
 const playImage=img.dataset.playSrc;
 const pauseImage=img.dataset.pauseSrc;
 
-let totalSeconds;
+let totalMilliSeconds;
 let temp;
 let interval;
 let isFirst=true;
-let totalBreakSeconds;
+let totalBreakMilliSeconds;
 let breakTime;
 let isOnBreak=false;
 
@@ -26,56 +26,59 @@ function startTimer(){
         }
         img.src=pauseImage;
         let [focusHours,focusMinutes,focusSeconds]=time.split(":").map(Number);
-        totalSeconds=(focusHours*3600)+(focusMinutes*60)+focusSeconds;
-        temp=totalSeconds;
-        breakTime=Math.floor(totalSeconds/2);
+        totalMilliSeconds=((focusHours*3600)+(focusMinutes*60)+focusSeconds)*1000;
+        temp=totalMilliSeconds;
+        breakTime=Math.floor(totalMilliSeconds/2);
         let [breakHours,breakMinutes,breakSeconds]=breakDuration.split(":").map(Number);
-        totalBreakSeconds=(breakHours*3600)+(breakMinutes*60)+breakSeconds;
+        totalBreakMilliSeconds=((breakHours*3600)+(breakMinutes*60)+breakSeconds)*1000;
         isOnBreak=false;
         clearInterval(interval);
-        interval=setInterval(tick,1000);
-        startMoving(totalSeconds+1);
+        interval=setInterval(tick,100);
+        startMoving(totalMilliSeconds+1);
     }
 }
 
 function tick(){
     if(!isOnBreak){
-        if(totalSeconds>0){
-            totalSeconds--;
-            updateTimer(totalSeconds);
-            if(totalSeconds===breakTime){
+        if(totalMilliSeconds>0){
+            totalMilliSeconds=Math.max(0,totalMilliSeconds-100);
+            updateTimer(totalMilliSeconds);
+            if(totalMilliSeconds<=breakTime){
                 isOnBreak=true;
             }
         }else{
             clearInterval(interval);
             isFirst=true;
+            totalMilliSeconds = 0;
+            updateTimer(totalMilliSeconds);
             alert("The session is done! Congratulations for successfully completing it!");
             sendSessionData(temp);
         }
     }else{
-        if(totalBreakSeconds>0){
+        if(totalBreakMilliSeconds>0){
             bikeImg.style.animationPlayState='paused';
-            totalBreakSeconds--;
+            totalBreakMilliSeconds-=100;
         }else{
             isOnBreak=false;
             bikeImg.style.animationPlayState='running';
-            totalSeconds--;
-            updateTimer(totalSeconds);
+            totalMilliSeconds=Math.max(0,totalMilliSeconds-100);
+            updateTimer(totalMilliSeconds);
         }
     }
 }
 
-function updateTimer(seconds){
-    const hours=Math.floor(seconds/3600);
-    const minutes=Math.floor((seconds%3600)/60);
-    const secs=seconds%60;
+function updateTimer(milliSeconds){
+    const totalMilliSeconds=Math.floor(milliSeconds/1000);
+    const hours=Math.floor(totalMilliSeconds/3600);
+    const minutes=Math.floor((totalMilliSeconds%3600)/60);
+    const secs=totalMilliSeconds%60;
     const newTime=[
         String(hours).padStart(2,'0'),
         String(minutes).padStart(2,'0'),
         String(secs).padStart(2,'0')
     ].join(":");
     timerElement.textContent=newTime;
-    percentageElement.textContent=Math.floor(((temp-seconds)/temp)*100);
+    percentageElement.textContent=Math.floor(((temp-milliSeconds)/temp)*100);
 }
 
 function restartTimer(){
@@ -86,16 +89,16 @@ function restartTimer(){
     isOnBreak=false;
     const time=focusDuration;
     let [hours,minutes,seconds]=time.split(":").map(Number);
-    totalSeconds=(hours*3600)+(minutes*60)+seconds;
+    totalMilliSeconds=((hours*3600)+(minutes*60)+seconds)*1000;
     timerElement.textContent=focusDuration;
     percentageElement.textContent=0;
 }
 
 function fastForwardTimer(){
     let allowedTime=((87/100)*temp);
-    if((temp-totalSeconds)>allowedTime){
+    if((temp-totalMilliSeconds)>allowedTime){
         clearInterval(interval);
-        interval=setInterval(tick,500);
+        interval=setInterval(tick,50);
     }else{
         alert("You need to pass through atleast 87% of the time");
     }
@@ -104,12 +107,12 @@ function fastForwardTimer(){
 function toggle(){
     if(img.src.includes("play.png")){
         img.src=pauseImage;
-        if(totalSeconds<=0&&!isOnBreak){
+        if(totalMilliSeconds<=0 && !isOnBreak){
             startTimer();
         }else{
             bikeImg.style.animationPlayState='running';
             clearInterval(interval);
-            interval=setInterval(tick,1000);
+            interval=setInterval(tick,100);
         }
     }else{
         img.src=playImage;
@@ -118,10 +121,10 @@ function toggle(){
     }
 }
 
-function startMoving(seconds){
+function startMoving(milliSeconds){
     bikeImg.style.animation='none';
     void bikeImg.offsetWidth;
-    bikeImg.style.animation=`move ${seconds}s linear`;
+    bikeImg.style.animation=`move ${milliSeconds/1000}s linear`;
 }
 
 function sendSessionData(session_seconds){

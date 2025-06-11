@@ -54,7 +54,7 @@ function fetchAndRender(range='days'){
                     y:{
                         beginAtZero: true,
                         min:0,
-                        max:0.04,
+                        max:0.09,
                         ticks:{
                             color: 'rgb(28,186,186)',
                             stepSize: 0.01

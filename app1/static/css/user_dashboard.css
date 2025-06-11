@@ -87,11 +87,18 @@ textarea{
     resize: none;
     justify-content: center;
     align-items: center;
-    margin-bottom: 38px;
+    margin-bottom: 20px;
     background-color: #a8ffff;
 }
 textarea::placeholder{
     color: #0B1C26;
+}
+.goal-button{
+    background-color: rgb(0, 89, 255);
+    width: 70px;
+    color: white;
+    border: none;
+    padding: 8px;
 }
 .chart{
     background-color: #0B1C26;
