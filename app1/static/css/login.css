@@ -1,19 +1,22 @@
 body{
     background-color: #16222A;
     color: white;
+    overflow-x: hidden;
 }
 .main{
-    margin-top: 190px;
+    margin-top: 190px !important;
     padding: 20px;
     height: 450px;
     align-items: center;
     text-align: center;
     justify-content: center;
-    margin-left: 29%;
+    margin-left: auto;
+    margin-right: auto;
     align-items: center;
     border-radius: 10px;
     background-color: #0B1C26;
-    width: 900px;
+    width: 90%;
+    max-width: 900px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -28,7 +31,8 @@ label{
     font-size: 24px;
 }
 input{
-    width: 200px;
+    width: 100%;
+    max-width: 300px;
     margin-top: 12px;
     padding: 5px;
 }
@@ -37,10 +41,11 @@ button,a{
     margin-top: 20px;
 }
 button{
+    width: 100%;
+    max-width: 300px;
     margin-top: 15px;
     cursor: pointer;
     padding: 4px;
-    width: 160px;
     background-color: #29B6F6;
     border: none;
     color: rgb(255, 255, 255);
@@ -50,4 +55,22 @@ button{
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+@media (max-width: 480px){
+    .main{
+        margin-top: 20px;
+        padding: 10px;
+    }
+    h1{
+        margin-bottom: 20px;
+        font-size: 20px;
+    }
+    label{
+        font-size: 16px;
+    }
+
+    button{
+        padding: 4px;
+    }
 }

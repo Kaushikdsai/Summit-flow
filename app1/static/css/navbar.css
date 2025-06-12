@@ -8,6 +8,8 @@
     z-index: 9999;
     padding: 24px;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
 }
 #login-register, .home, #logout{
@@ -19,7 +21,8 @@
     color: #4FC3F7;
 }
 img{
-    width: 40px;
+    width: 100%;
+    max-width: 40px;
 }
 .app-name{
     display: inline-block;
@@ -44,7 +47,7 @@ img{
     margin-top: 0;
 }
 .right-li{
-    margin-left: 1380px;
+    margin-left: 1300px;
     gap: 16px;
 }
 nav ul {
@@ -54,4 +57,9 @@ nav ul {
 }
 .login-register{
     list-style-type: none;
+}
+@media (max-width:480px){
+    .right-li{
+        margin-left: auto;
+    }
 }

@@ -52,7 +52,7 @@ function tick(){
             totalMilliSeconds = 0;
             updateTimer(totalMilliSeconds);
             alert("The session is done! Congratulations for successfully completing it!");
-            sendSessionData(temp);
+            sendSessionData(temp/1000);
         }
     }else{
         if(totalBreakMilliSeconds>0){

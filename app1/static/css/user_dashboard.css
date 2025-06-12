@@ -50,7 +50,7 @@ p{
     justify-content: center;
 }
 .user-badges{
-    height: 240px;
+    height: auto;
     flex: 40;
     background-color: #0B1C26;
     padding: 45px;             
@@ -63,8 +63,10 @@ p{
     justify-content: center;
 }
 .badge{
-    width: 130px;
-    height: 130px;
+    width: auto;
+    max-width: 100px;
+    height: auto;
+    max-height: 130px;
     margin: 10px;
 }
 .user-goals{
