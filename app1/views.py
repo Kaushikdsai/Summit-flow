@@ -19,6 +19,8 @@ from django.contrib.auth import logout
 from datetime import date
 # Create your views here.
 
+restricted_websites=[]
+
 def home(request):
     return render(request,'home.html')
 
@@ -108,15 +110,33 @@ def timer(request):
 def session(request):
     focus_duration=request.GET.get('focus_duration')
     break_duration=request.GET.get('break_duration','')
+    websites=request.GET.get('websites','')
     if not break_duration:
         break_duration=None
-    websites=request.GET.get('websites')
+    if not websites:
+        websites=None
     context = {
         'focus_duration':focus_duration,
         'break_duration':break_duration,
         'websites':websites
     }
     return render(request,'session.html',context)
+
+def restricted_urls(request):
+    if(request.method=="GET"):
+        return JsonResponse({"restricted_urls":restricted_websites})
+    
+    elif(request.method=="POST"):
+        data=json.loads(request.body)
+        if restricted_urls in data:
+            urls=data.get("restricted_urls",[])
+            urls=list(set(urls))
+            return JsonResponse({"status":"success", "restricted_urls":restricted_websites})
+        else:
+            return JsonResponse({"status":"error","message":"Invalid data"})
+        
+    else:
+        return JsonResponse({"message":"Invalid Request Method!"})
 
 def mailSent(request,reset_id):
     if PasswordReset.objects.filter(reset_id=reset_id).exists():

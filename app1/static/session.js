@@ -19,6 +19,7 @@ let isOnBreak=false;
 function startTimer(){
     if(isFirst){
         isFirst=false;
+        console.log("time: "+focusDuration);
         const time=focusDuration;
         if(!time){
             alert("Enter valid time!");

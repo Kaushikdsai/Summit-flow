@@ -27,6 +27,7 @@ urlpatterns = [
     path('login/register/',views.register,name='register'),
     path('timer/',views.timer,name='timer'),
     path('session/', views.session, name='session'),
+    path('api/restricted-urls/',views.restricted_urls,name='restricted-urls'),
     path('login/forgot-password/',views.forgotPassword,name='forgot-password'),
     path('password-reset-mail-sent/<str:reset_id>',views.mailSent,name='mail-sent'),
     path('reset-done/',views.resetDone,name='reset-done'),

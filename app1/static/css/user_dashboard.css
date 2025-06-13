@@ -27,8 +27,7 @@ p{
     background-color: #0B1C26;
     width: 18%;
     padding: 40px;
-    margin-left: 768px;
-    margin-bottom: 40px;
+    margin: 0 auto 40px auto;
 }
 .user-information p{
     color: #FFB700;
@@ -39,6 +38,7 @@ p{
     margin-bottom: 40px;
     text-align: center;
     align-items: center;
+    justify-content: center;
 }
 .session-details{
     flex: 30;
@@ -84,12 +84,10 @@ p{
     border-radius: 20px;
 }
 textarea{
-    margin: 0;
+    margin: 0 auto 20px auto;
     width: 320px;
     resize: none;
     justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
     background-color: #a8ffff;
 }
 textarea::placeholder{
