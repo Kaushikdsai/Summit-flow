@@ -54,5 +54,9 @@ class UserData(models.Model):
     date=models.DateField()
     hours=models.FloatField()
 
-
-    
+class SessionDetails(models.Model):
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
+    focus_duration=models.FloatField()
+    break_duration=models.FloatField()
+    websites_blocked=models.TextField()
+    time=models.DateTimeField()

@@ -163,6 +163,7 @@ function getCookie(name){
     return cookieValue;
 }
 
+
 startElement.addEventListener("click",()=>{
     if(isFirst){
         startTimer();

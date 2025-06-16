@@ -17,6 +17,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout
 from datetime import date
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 restricted_websites=[]
@@ -51,11 +52,8 @@ def login(request):
     return render(request, 'login.html', {'form': form})
 
 def user_logout(request):
-    print("going to get logged out")
     logout(request)
-    print("logged out")
     request.session.flush()
-    print("flushed")
     return redirect('login')
 
 def register(request):
@@ -122,13 +120,17 @@ def session(request):
     }
     return render(request,'session.html',context)
 
+@csrf_exempt
 def restricted_urls(request):
+    print("RU")
     if(request.method=="GET"):
+        print("GET")
         return JsonResponse({"restricted_urls":restricted_websites})
     
     elif(request.method=="POST"):
+        print("POST")
         data=json.loads(request.body)
-        if restricted_urls in data:
+        if "restricted_urls" in data:
             urls=data.get("restricted_urls",[])
             urls=list(set(urls))
             return JsonResponse({"status":"success", "restricted_urls":restricted_websites})
@@ -137,6 +139,9 @@ def restricted_urls(request):
         
     else:
         return JsonResponse({"message":"Invalid Request Method!"})
+
+def sessionDetails(request):
+    user=request.user
 
 def mailSent(request,reset_id):
     if PasswordReset.objects.filter(reset_id=reset_id).exists():

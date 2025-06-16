@@ -1,8 +1,18 @@
 let restrictedWebsites=[];
 function fetchRestrictedWebsites(){
-    fetch("http://127.0.0.1:8000/api/restricted-urls/")
+    fetch("http://127.0.0.1:8000/api/restricted-urls/",{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            restricted_urls: ["https://www.g.com"], 
+        }),
+    })
+    
     .then((response) => response.json())
     .then((data) => {
+        console.log("Response Data: ", data);
         restrictedWebsites=data.restricted_urls || [];
         console.log("Restricted Websites: ", restrictedWebsites);
     })
