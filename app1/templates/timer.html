@@ -9,7 +9,7 @@
 </head>
 <body>
     {% include 'navbar.html' %}
-    <form method="POST" class="main">
+    <form id="timerForm" method="POST" action="{% url 'timer' %}" class="main">
         {% csrf_token %}
         <h1>SESSION DETAILS</h1>
         <div class="details">
@@ -34,8 +34,61 @@
             {% endfor %}
         </ul>
         {% endif %}
-        <button>Start</button>
+        <button type="button" id="submitForm">Start</button>
     </form>
     <script src="{% static 'session.js' %}"></script>
+    <script>
+        document.getElementById("submitForm").addEventListener("click", function (e) {
+            e.preventDefault();
+            const focusDuration=document.getElementById("focusDuration").value;
+            const breakDuration=document.getElementById("breakDuration").value;
+            const websites=document.getElementById("websites").value
+                .split("\n")
+                .map((url) => url.trim())
+                .filter((url) => url !== "");
+
+            fetch("/api/restricted-urls/",{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": getCookie("csrftoken"),
+                },
+                body: JSON.stringify({
+                    restricted_urls: websites,
+                }),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                if(data.status==="success"){
+                    const queryParams=new URLSearchParams({
+                        focus_duration: focusDuration,
+                        break_duration: breakDuration,
+                        websites: websites.join(","),
+                    }).toString();
+                    window.location.href=`/session/?${queryParams}`;
+                }
+                else{
+                    alert("Failed to submit: "+(data.message || "Unknown error"));
+                }
+            })
+            .catch((error) => console.error("Error:", error));
+        });
+
+        function getCookie(name){
+            let cookieValue=null;
+            if(document.cookie && document.cookie !== ""){
+                const cookies=document.cookie.split(";");
+                for(let cookie of cookies){
+                    cookie=cookie.trim();
+                    if(cookie.startsWith(name+"=")){
+                        cookieValue=decodeURIComponent(cookie.substring(name.length+1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    </script>
 </body>
 </html>

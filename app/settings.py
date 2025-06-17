@@ -29,10 +29,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
+    "corsheaders",
     'app1',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,18 +41,23 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-
+    
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',  # Keep this for admin
-    'app1.middleware.CustomAuthenticationMiddleware',          # Your middleware after auth middleware
+    'django.contrib.auth.middleware.AuthenticationMiddleware', 
+    'app1.middleware.CustomAuthenticationMiddleware',       
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:8000",
+    "chrome-extension://naoanehkchgladgfeikoggikeaeabgfm"
+]
 
 ROOT_URLCONF = 'app.urls'
 
