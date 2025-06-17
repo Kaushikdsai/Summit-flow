@@ -1,22 +1,18 @@
 let restrictedWebsites=[];
-function fetchRestrictedWebsites(urls=null){
-    const body = urls ? { restricted_urls: urls } : null;
-    fetch("http://127.0.0.1:8000/api/restricted-urls/",{
+function fetchRestrictedWebsites() {
+    fetch("http://127.0.0.1:8000/api/restricted-urls/", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-            restricted_urls: urls, 
-        }),
     })
-    
     .then((response) => response.json())
     .then((data) => {
         console.log("Response Data: ", data);
-        restrictedWebsites=data.restricted_urls || [];
+        restrictedWebsites = data.restricted_urls || [];
         console.log("Restricted Websites: ", restrictedWebsites);
     })
+    .catch((error) => console.error("Error fetching restricted websites:", error));
 }
 
 chrome.webRequest.onBeforeRequest.addListener(

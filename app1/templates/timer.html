@@ -59,7 +59,7 @@
             })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
+                console.log("API Response: "+data);
                 if(data.status==="success"){
                     const queryParams=new URLSearchParams({
                         focus_duration: focusDuration,
