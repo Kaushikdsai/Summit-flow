@@ -4,7 +4,7 @@ document.getElementById("refresh").addEventListener("click", () => {
             alert(response.message);
         }
         else{
-            alert("Error: "+response.message);
+            alert("Error: " + response.message);
         }
     });
 });
@@ -17,7 +17,8 @@ chrome.runtime.sendMessage({ action: "getUrls" }, (response) => {
             li.textContent=site;
             listElement.appendChild(li);
         });
-    } else {
-        listElement.textContent = "No restricted websites.";
+    }
+    else{
+        listElement.textContent="No restricted websites.";
     }
 });

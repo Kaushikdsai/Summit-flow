@@ -124,28 +124,32 @@ def session(request):
 def restricted_urls(request):
     global restricted_websites
     print("RU")
-    if(request.method=="GET"):
+    if request.method == "GET":
         print("GET")
-        return JsonResponse({"restricted_urls":restricted_websites})
+        websites=[
+            url.replace("http://", "").replace("https://", "").rstrip("/")
+            for url in restricted_websites
+        ]
+        return JsonResponse({"restricted_urls": websites})
     
-    elif(request.method=="POST"):
-        print("POST Request Body:", request.body)
+    elif request.method == "POST":
+        print("POST Request Body:",request.body)
         try:
             if request.content_type=="application/json":
                 data=json.loads(request.body)
             else:
                 data=request.POST
             print("Parsed Data:", data)
-            urls=data.get("restricted_urls",[])
+            urls=data.get("restricted_urls", [])
             if urls:
-                restricted_websites=list(set(restricted_websites+urls))
-                return JsonResponse({"status":"success", "restricted_urls":restricted_websites})
+                restricted_websites=list(set(urls))
+                return JsonResponse({"status": "success", "restricted_urls": restricted_websites})
             else:
-                return JsonResponse({"status":"error","message":"Invalid data"}, status=400)
+                return JsonResponse({"status": "error", "message": "Invalid data"}, status=400)
         except json.JSONDecodeError:
-            return JsonResponse({"status":"error","message":"Invalid data"}, status=400)
+            return JsonResponse({"status": "error", "message": "Invalid data"}, status=400)
     else:
-        return JsonResponse({"message":"Invalid Request Method!"},status=405)
+        return JsonResponse({"message": "Invalid Request Method!"}, status=405)
 
 def sessionDetails(request):
     user=request.user

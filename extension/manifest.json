@@ -2,20 +2,23 @@
   "manifest_version": 3,
   "name": "Website Restriction Alert",
   "version": "1.0",
-  "description": "Alerts the user when they attempt to visit restricted websites.",
-  "permissions": [
-    "webRequest",  
-    "webRequestBlocking", 
-    "storage", 
-    "activeTab" 
-  ],
-  "host_permissions": [
-    "<all_urls>" 
-  ],
+  "description": "Displays a notification when a restricted website is visited.",
+  "permissions": ["notifications", "tabs", "storage", "activeTab"],
+  "host_permissions": ["<all_urls>"],
   "background": {
-    "service_worker": "background.js" 
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "128": "icons/icon128.png"
   },
   "action": {
-    "default_popup": "popup.html"
-  }
+    "default_popup": "popup.html",
+    "default_icon": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/icon128.png"],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }
