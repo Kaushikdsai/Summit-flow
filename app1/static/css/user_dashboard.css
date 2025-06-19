@@ -35,7 +35,7 @@ p{
 .user-details{
     display: flex;
     gap: 15px;
-    margin-bottom: 40px;
+    margin-bottom: 16px;
     text-align: center;
     align-items: center;
     justify-content: center;
@@ -50,7 +50,7 @@ p{
     justify-content: center;
 }
 .user-badges{
-    height: auto;
+    height: 100%;
     flex: 40;
     background-color: #0B1C26;
     padding: 45px;             
