@@ -2,8 +2,15 @@
   "manifest_version": 3,
   "name": "Website Restriction Alert",
   "version": "1.0",
-  "description": "Displays a notification when a restricted website is visited.",
-  "permissions": ["notifications", "tabs", "storage", "activeTab"],
+  "description": "Displays a notification and blocks restricted websites.",
+  "permissions": [
+    "notifications",
+    "tabs",
+    "storage",
+    "activeTab",
+    "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess"
+  ],
   "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "background.js"

@@ -1,0 +1,26 @@
+body{
+    background-color: #0B1C26;
+    color: white;
+}
+h1{
+    color: #4FC3F7;
+    text-align: center;
+}
+button{
+    color: white;
+    border: none;
+    padding: 3px;
+    width: 90px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+ul{
+    list-style-type: none;
+}
+#refresh{
+    background-color: blue;
+}
+#clear{
+    background-color: red;
+}

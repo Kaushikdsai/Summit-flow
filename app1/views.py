@@ -124,7 +124,7 @@ def session(request):
 def restricted_urls(request):
     global restricted_websites
     print("RU")
-    if request.method == "GET":
+    if request.method=="GET":
         print("GET")
         websites=[
             url.replace("http://", "").replace("https://", "").rstrip("/")
@@ -132,7 +132,7 @@ def restricted_urls(request):
         ]
         return JsonResponse({"restricted_urls": websites})
     
-    elif request.method == "POST":
+    elif request.method=="POST":
         print("POST Request Body:",request.body)
         try:
             if request.content_type=="application/json":

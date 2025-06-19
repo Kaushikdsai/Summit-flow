@@ -47,7 +47,8 @@ function tick(){
             if(totalMilliSeconds<=breakTime){
                 isOnBreak=true;
             }
-        }else{
+        }
+        else{
             clearInterval(interval);
             isFirst=true;
             totalMilliSeconds = 0;
@@ -55,11 +56,13 @@ function tick(){
             alert("The session is done! Congratulations for successfully completing it!");
             sendSessionData(temp/1000);
         }
-    }else{
+    }
+    else{
         if(totalBreakMilliSeconds>0){
             bikeImg.style.animationPlayState='paused';
             totalBreakMilliSeconds-=100;
-        }else{
+        }
+        else{
             isOnBreak=false;
             bikeImg.style.animationPlayState='running';
             totalMilliSeconds=Math.max(0,totalMilliSeconds-100);
@@ -100,7 +103,8 @@ function fastForwardTimer(){
     if((temp-totalMilliSeconds)>allowedTime){
         clearInterval(interval);
         interval=setInterval(tick,50);
-    }else{
+    }
+    else{
         alert("You need to pass through atleast 87% of the time");
     }
 }
@@ -110,12 +114,14 @@ function toggle(){
         img.src=pauseImage;
         if(totalMilliSeconds<=0 && !isOnBreak){
             startTimer();
-        }else{
+        }
+        else{
             bikeImg.style.animationPlayState='running';
             clearInterval(interval);
             interval=setInterval(tick,100);
         }
-    }else{
+    }
+    else{
         img.src=playImage;
         bikeImg.style.animationPlayState='paused';
         clearInterval(interval);
@@ -150,7 +156,7 @@ function sendSessionData(session_seconds){
 
 function getCookie(name){
     let cookieValue=null;
-    if(document.cookie&&document.cookie!==""){
+    if(document.cookie && document.cookie!==""){
         const cookies=document.cookie.split(";");
         for(let cookie of cookies){
             cookie=cookie.trim();
@@ -163,10 +169,10 @@ function getCookie(name){
     return cookieValue;
 }
 
-
 startElement.addEventListener("click",()=>{
     if(isFirst){
         startTimer();
+    
     }else{
         toggle();
     }
