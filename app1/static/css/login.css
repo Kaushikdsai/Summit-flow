@@ -4,19 +4,16 @@ body{
     overflow-x: hidden;
 }
 .main{
-    margin-top: 190px !important;
+    margin-top: 190px;
     padding: 20px;
-    height: 450px;
-    align-items: center;
+    height: 480px;
     text-align: center;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
     align-items: center;
+    justify-content: center;
+    margin-left: 29%;
     border-radius: 10px;
     background-color: #0B1C26;
-    width: 90%;
-    max-width: 900px;
+    width: 900px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -31,8 +28,7 @@ label{
     font-size: 24px;
 }
 input{
-    width: 100%;
-    max-width: 300px;
+    width: 260px;
     margin-top: 12px;
     padding: 5px;
 }
@@ -41,8 +37,7 @@ button,a{
     margin-top: 20px;
 }
 button{
-    width: 100%;
-    max-width: 300px;
+    width: 160px;
     margin-top: 15px;
     cursor: pointer;
     padding: 4px;
@@ -55,22 +50,4 @@ button{
     list-style: none;
     padding: 0;
     margin: 0;
-}
-
-@media (max-width: 480px){
-    .main{
-        margin-top: 20px;
-        padding: 10px;
-    }
-    h1{
-        margin-bottom: 20px;
-        font-size: 20px;
-    }
-    label{
-        font-size: 16px;
-    }
-
-    button{
-        padding: 4px;
-    }
 }
