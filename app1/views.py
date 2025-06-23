@@ -151,8 +151,6 @@ def restricted_urls(request):
     else:
         return JsonResponse({"message": "Invalid Request Method!"}, status=405)
 
-def sessionDetails(request):
-    user=request.user
 
 def mailSent(request,reset_id):
     if PasswordReset.objects.filter(reset_id=reset_id).exists():
@@ -243,14 +241,14 @@ def update_metrics(request):
         user_data.hours+=hours
         user_data.save()
 
-        name=data.get('name')
-        session_seconds=data.get('session_seconds',0)
-        break_seconds=data.get('break_seconds',0)
-        websites=data.get('websites',"")
-        curr_time=datetime.now()
-        formatted_time=curr_time.strftime('%Y-%m-%d %H:%M:%S')
-        print("Websites: ",websites)
-        print("time: ",curr_time)
+        #name=data.get('name')
+        #session_seconds=data.get('session_seconds',0)
+        #break_seconds=data.get('break_seconds',0)
+        #websites=data.get('websites',"")
+        #curr_time=datetime.now()
+        #formatted_time=curr_time.strftime('%Y-%m-%d %H:%M:%S')
+        #print("Websites: ",websites)
+        #print("time: ",curr_time)
         
         #SessionDetails.objects.create(
         #    user=request.user,

@@ -139,9 +139,7 @@ function startMoving(milliSeconds){
 
 function sendSessionData(session_seconds,break_seconds){
     console.log('Sending session data:',session_seconds);
-    const websites=restrictedWebsites.value
-        .split('\n')
-        .map(url => url.trim())
+    const websites=restrictedWebsites
         .filter(url => url!=="")
         .join(',');
     fetch('/update-metrics/',{
@@ -157,7 +155,7 @@ function sendSessionData(session_seconds,break_seconds){
     .then(data=>{
         console.log(data);
     })
-    .catch(error=>{
+    .catch((error)=>{
         console.error('Error sending session data:',error);
     });
 }
