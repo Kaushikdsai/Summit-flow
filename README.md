@@ -5,7 +5,7 @@ SummitFlow is a productivity application designed to help users stay focused and
 With SummitFlow, users can:
 - Track their productive sessions.
 - Block distracting websites during focus time.
-- Earn achievements and badges.
+- Earn bronze, silver, and gold badges.
 - View detailed performance statistics through a personalized dashboard.
 - Compete with others via a leaderboard system.
 
