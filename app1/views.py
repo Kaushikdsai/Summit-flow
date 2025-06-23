@@ -228,6 +228,7 @@ def forgotPassword(request):
 @login_required
 def update_metrics(request):
     if request.method=="POST":
+        print("Entered")
         data=json.loads(request.body)
         session_seconds=data.get('session_seconds',0)
         metrics, created=UserMetrics.objects.get_or_create(user=request.user)
@@ -241,6 +242,25 @@ def update_metrics(request):
         user_data,created=UserData.objects.get_or_create(user=request.user,date=today,defaults={'hours':0})
         user_data.hours+=hours
         user_data.save()
+
+        name=data.get('name')
+        session_seconds=data.get('session_seconds',0)
+        break_seconds=data.get('break_seconds',0)
+        websites=data.get('websites',"")
+        curr_time=datetime.now()
+        formatted_time=curr_time.strftime('%Y-%m-%d %H:%M:%S')
+        print("Websites: ",websites)
+        print("time: ",curr_time)
+        
+        #SessionDetails.objects.create(
+        #    user=request.user,
+        #    name=name,
+        #    focus_duration=session_seconds/60,
+        #    break_duration=break_seconds/60,
+        #    websites_blocked=websites,
+        #    time=formatted_time
+        #)
+
         responseData={
             'total_hours':metrics.total_hours,
             'rating': metrics.rating,

@@ -10,6 +10,7 @@ const pauseImage=img.dataset.pauseSrc;
 
 let totalMilliSeconds;
 let temp;
+let temp_break;
 let interval;
 let isFirst=true;
 let totalBreakMilliSeconds;
@@ -32,6 +33,7 @@ function startTimer(){
         breakTime=Math.floor(totalMilliSeconds/2);
         let [breakHours,breakMinutes,breakSeconds]=breakDuration.split(":").map(Number);
         totalBreakMilliSeconds=((breakHours*3600)+(breakMinutes*60)+breakSeconds)*1000;
+        temp_break=totalBreakMilliSeconds;
         isOnBreak=false;
         clearInterval(interval);
         interval=setInterval(tick,100);
@@ -54,7 +56,8 @@ function tick(){
             totalMilliSeconds = 0;
             updateTimer(totalMilliSeconds);
             alert("The session is done! Congratulations for successfully completing it!");
-            sendSessionData(temp/1000);
+
+            sendSessionData(temp/1000,temp_break/1000);
         }
     }
     else{
@@ -134,15 +137,20 @@ function startMoving(milliSeconds){
     bikeImg.style.animation=`move ${milliSeconds/1000}s linear`;
 }
 
-function sendSessionData(session_seconds){
+function sendSessionData(session_seconds,break_seconds){
     console.log('Sending session data:',session_seconds);
+    const websites=restrictedWebsites.value
+        .split('\n')
+        .map(url => url.trim())
+        .filter(url => url!=="")
+        .join(',');
     fetch('/update-metrics/',{
         method:'POST',
         headers:{
             'Content-Type':'application/json',
             'X-CSRFToken':getCookie('csrftoken'),
         },
-        body:JSON.stringify({session_seconds}),
+        body:JSON.stringify({session_seconds, break_seconds, websites}),
         credentials:'include'
     })
     .then(response=>response.json())

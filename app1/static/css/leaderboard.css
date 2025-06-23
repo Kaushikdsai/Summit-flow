@@ -2,9 +2,15 @@ body{
     background-color: #16222A;
     color: white;   
 }
+.title{
+    margin-top: 140px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #29B6F6
+}
 .main-table {
     width: 80%;
-    margin: 160px auto 0 auto;
+    margin: 0 auto 0 auto;
     border-collapse: collapse;
 }
 .main-table th, .main-table td {
