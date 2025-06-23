@@ -18,7 +18,7 @@ With SummitFlow, users can:
 - Earn badges (Bronze, Silver, Gold) based on achievements.
 - Compete with others and climb the leaderboard.
 
-### 3. **Distraction Blocking**
+### 3. **Website Blocking**
 - Blocks specified distracting websites during productive sessions.
 - Implemented as a custom Chrome extension for seamless integration.
 
