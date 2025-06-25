@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p^aa91f*qx&b2(z^lg&ox5ghba@sb7e5ba^efqkem5vau(m!mg'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -81,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db1',
         'USER': 'root',
-        'PASSWORD': 'kajothsida123',
+        'PASSWORD': '*', #replace with your password
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -119,8 +119,8 @@ EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
 EMAIL_USE_SSL=False
-EMAIL_HOST_USER='kaushik.npt@gmail.com'
-EMAIL_HOST_PASSWORD='clpr rtgv qjwe jafl'
+EMAIL_HOST_USER='*'
+EMAIL_HOST_PASSWORD='*'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
